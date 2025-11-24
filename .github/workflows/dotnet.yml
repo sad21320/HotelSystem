@@ -1,0 +1,36 @@
+name: .NET Build and Test
+
+# Триггеры: запускать при push (отправке) или pull request в ветку main
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch: # Позволяет запускать вручную кнопку на сайте
+
+jobs:
+  build:
+    # Виртуальная машина, на которой будет запускаться сборка (Linux)
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Клонирование вашего репозитория на виртуальную машину
+    - uses: actions/checkout@v4
+
+    # 2. Установка .NET SDK
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x # УКАЖИТЕ ВАШУ ВЕРСИЮ (например, 6.0.x, 7.0.x, 8.0.x)
+
+    # 3. Восстановление зависимостей (NuGet пакетов)
+    - name: Restore dependencies
+      run: dotnet restore
+
+    # 4. Компиляция решения
+    - name: Build
+      run: dotnet build --no-restore
+
+    # 5. Запуск тестов
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
