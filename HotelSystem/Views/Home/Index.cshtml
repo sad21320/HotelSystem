@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Главная";
+}
+
+<div class="text-center mt-5">
+    <h1 class="display-4">Система бронирования отеля</h1>
+    <p class="lead mt-4">Добро пожаловать!</p>
+
+    @if (User.Identity?.IsAuthenticated ?? false)
+    {
+        <p class="display-6">Вы успешно вошли как <strong>@User.Identity?.Name</strong></p>
+        @if (User.IsInRole("Admin"))
+        {
+            <p class="text-success fw-bold">Роль: Администратор</p>
+        }
+    }
+
+    <hr class="my-5" />
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <a asp-controller="Bookings" asp-action="Index" class="btn btn-primary btn-lg w-100 py-4">Бронирования</a>
+        </div>
+        <div class="col-md-4">
+            <a asp-controller="Rooms" asp-action="Index" class="btn btn-success btn-lg w-100 py-4">Номера</a>
+        </div>
+        <div class="col-md-4">
+            <a asp-controller="Guests" asp-action="Index" class="btn btn-info btn-lg w-100 py-4 text-white">Гости</a>
+        </div>
+    </div>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="mt-5">
+            <a asp-area="Identity" asp-page="/Account/Manage/Users" class="btn btn-warning btn-lg">
+                Управление пользователями
+            </a>
+        </div>
+    }
+</div>

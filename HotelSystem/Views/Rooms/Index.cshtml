@@ -1,0 +1,60 @@
+﻿@model IEnumerable<HotelSystem.Models.Room>
+@{
+    ViewData["Title"] = "Номера отеля";
+}
+
+<h2 class="my-4">Все номера</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Добавить номер</a>
+</p>
+
+<table class="table table-hover">
+    <thead class="table-primary">
+        <tr>
+            <th>Номер</th>
+            <th>Этаж</th>
+            <th>Тип номера</th>
+            <th>Вместимость</th>
+            <th>Цена за ночь</th>
+            <th>Статус</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var room in Model)
+        {
+            <tr>
+                <td><strong>@room.RoomNumber</strong></td>
+                <td>@room.Floor</td>
+                <td>@room.RoomType.TypeName</td>
+                <td>@room.RoomType.Capacity чел.</td>
+                <td>@room.RoomType.BasePrice.ToString("C0")</td>
+                <td>
+                    @{
+                        var badge = room.Status switch
+                        {
+                            "Available" => "bg-success",
+                            "Booked" => "bg-danger",
+                            "Cleaning" => "bg-warning",
+                            _ => "bg-secondary"
+                        };
+                        var text = room.Status switch
+                        {
+                            "Available" => "Свободен",
+                            "Booked" => "Забронирован",
+                            "Cleaning" => "Уборка",
+                            _ => room.Status
+                        };
+                    }
+                    <span class="badge @badge">@text</span>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@room.RoomID" class="btn btn-sm btn-warning">Изменить</a>
+                    <a asp-action="Details" asp-route-id="@room.RoomID" class="btn btn-sm btn-info">Подробнее</a>
+                    <a asp-action="Delete" asp-route-id="@room.RoomID" class="btn btn-sm btn-danger">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

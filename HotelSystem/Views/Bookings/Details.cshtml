@@ -1,0 +1,35 @@
+﻿@model HotelSystem.Models.Booking
+@{
+    ViewData["Title"] = "Детали бронирования";
+}
+
+<h1>Детали бронирования #@Model.BookingID</h1>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Заезд</dt>
+        <dd class="col-sm-10">@Model.CheckInDate.ToString("dd.MM.yyyy")</dd>
+
+        <dt class="col-sm-2">Выезд</dt>
+        <dd class="col-sm-10">@Model.CheckOutDate.ToString("dd.MM.yyyy")</dd>
+
+        <dt class="col-sm-2">Сумма</dt>
+        <dd class="col-sm-10">@Model.TotalPrice ₽</dd>
+
+        <dt class="col-sm-2">Статус</dt>
+        <dd class="col-sm-10">@Model.Status</dd>
+
+        <dt class="col-sm-2">Номер</dt>
+        <dd class="col-sm-10">@Model.Room?.RoomNumber (@Model.Room?.RoomType?.TypeName)</dd>
+
+        <dt class="col-sm-2">Гость</dt>
+        <dd class="col-sm-10">
+            @Model.Guest?.LastName @Model.Guest?.FirstName[0]. @Model.Guest?.MiddleName?[0].
+            (@Model.Guest?.PhoneNumber)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.BookingID" class="btn btn-warning">Редактировать</a> |
+    <a asp-action="Index" class="btn btn-primary">Назад к списку</a>
+</div>

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<HotelSystem.Models.Guest>
+<h2 class="my-4">Гости</h2>
+<p><a asp-action="Create" class="btn btn-success">Добавить гостя</a></p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ФИО</th>
+            <th>Паспорт</th>
+            <th>Телефон</th>
+            <th>Email</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var g in Model)
+        {
+            <tr>
+                <td>@g.LastName @g.FirstName @g.MiddleName</td>
+                <td>@g.PassportSeries @g.PassportNumber</td>
+                <td>@g.PhoneNumber</td>
+                <td>@g.Email</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@g.GuestID" class="btn btn-sm btn-warning">Изменить</a>
+                    <a asp-action="Delete" asp-route-id="@g.GuestID" class="btn btn-sm btn-danger">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

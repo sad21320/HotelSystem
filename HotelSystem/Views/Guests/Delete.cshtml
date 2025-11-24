@@ -1,0 +1,27 @@
+﻿@model HotelSystem.Models.Guest
+@{
+    ViewData["Title"] = "Удалить гостя";
+}
+
+<h2>Удалить гостя?</h2>
+<h4 class="text-danger">Это действие нельзя отменить!</h4>
+
+<div class="card border-danger">
+    <div class="card-header">
+        <h5>@Model.LastName @Model.FirstName @Model.MiddleName</h5>
+    </div>
+    <div class="card-body">
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>Телефон:</strong> @Model.PhoneNumber</p>
+        <p><strong>Паспорт:</strong> @Model.PassportSeries @Model.PassportNumber</p>
+        <p><strong>Зарегистрирован:</strong> @Model.CreatedDate.ToString("dd.MM.yyyy HH:mm")</p>
+    </div>
+    <div class="card-footer">
+        <form asp-action="Delete" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="GuestID" />
+            <button type="submit" class="btn btn-danger">Да, удалить навсегда</button>
+            <a asp-action="Index" class="btn btn-secondary ms-3">Отмена</a>
+        </form>
+    </div>
+</div>

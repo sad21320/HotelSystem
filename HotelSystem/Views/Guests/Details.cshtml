@@ -1,0 +1,76 @@
+﻿@model HotelSystem.Models.Guest
+@{
+    ViewData["Title"] = "Карточка гостя";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-primary">
+        Карточка гостя
+    </h2>
+
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">
+                <strong>@Model.LastName @Model.FirstName</strong>
+                @(string.IsNullOrEmpty(Model.MiddleName) ? "" : Model.MiddleName)
+            </h4>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-borderless">
+                        <tr>
+                            <th width="40%" class="text-secondary">ФИО:</th>
+                            <td><strong>@Model.LastName @Model.FirstName @Model.MiddleName</strong></td>
+                        </tr>
+                        <tr>
+                            <th class="text-secondary">Email:</th>
+                            <td><a href="mailto:@Model.Email" class="text-decoration-none">@Model.Email</a></td>
+                        </tr>
+                        <tr>
+                            <th class="text-secondary">Телефон:</th>
+                            <td><a href="tel:@Model.PhoneNumber" class="text-decoration-none">@Model.PhoneNumber</a></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col-md-6">
+                    <table class="table table-borderless">
+                        <tr>
+                            <th width="40%" class="text-secondary">Паспорт:</th>
+                            <td>
+                                <span class="badge bg-dark">@Model.PassportSeries</span>
+                                <span class="badge bg-secondary ms-2">@Model.PassportNumber</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-secondary">Дата регистрации:</th>
+                            <td>
+                                <span class="text-success fw-bold">
+                                    @Model.CreatedDate.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("ru-RU"))
+                                </span>
+                                <br />
+                                <small class="text-muted">@Model.CreatedDate.ToString("HH:mm")</small>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer bg-light">
+            <div class="btn-group" role="group">
+                <a asp-action="Edit" asp-route-id="@Model.GuestID" class="btn btn-warning">
+                    Редактировать
+                </a>
+                <a asp-action="Delete" asp-route-id="@Model.GuestID" class="btn btn-danger">
+                    Удалить
+                </a>
+                <a asp-action="Index" class="btn btn-secondary">
+                    Назад к списку
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@model HotelSystem.Models.Room
+@{
+    ViewData["Title"] = "Добавить номер";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create" method="post">
+    <input type="hidden" asp-for="RoomID" />
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label asp-for="RoomNumber" class="form-label">Номер комнаты</label>
+                <input asp-for="RoomNumber" class="form-control" placeholder="101, 205 и т.д." />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Floor" class="form-label">Этаж</label>
+                <input asp-for="Floor" class="form-control" type="number" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="RoomTypeID" class="form-label">Тип номера</label>
+                <select asp-for="RoomTypeID" class="form-select" asp-items="@(new SelectList(ViewBag.RoomTypes, "RoomTypeID", "TypeName"))">
+                    <option value="">— Выберите тип —</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Status" class="form-label">Статус</label>
+                <select asp-for="Status" class="form-select">
+                    <option value="Available">Свободен</option>
+                    <option value="Booked">Забронирован</option>
+                    <option value="Cleaning">Уборка</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+</form>

@@ -1,0 +1,59 @@
+﻿@model HotelSystem.Models.Guest
+@{
+    ViewData["Title"] = "Добавить гостя";
+}
+
+<h2>Добавить нового гостя</h2>
+
+<form asp-action="Create">
+    <div class="row g-3">
+        <div class="col-md-4">
+            <label asp-for="FirstName" class="form-label">Имя</label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="LastName" class="form-label">Фамилия</label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="MiddleName" class="form-label">Отчество (необязательно)</label>
+            <input asp-for="MiddleName" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row g-3 mt-2">
+        <div class="col-md-3">
+            <label asp-for="PassportSeries" class="form-label">Серия паспорта</label>
+            <input asp-for="PassportSeries" class="form-control" placeholder="0000" />
+            <span asp-validation-for="PassportSeries" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="PassportNumber" class="form-label">Номер паспорта</label>
+            <input asp-for="PassportNumber" class="form-control" placeholder="000000" />
+            <span asp-validation-for="PassportNumber" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="PhoneNumber" class="form-label">Телефон</label>
+            <input asp-for="PhoneNumber" class="form-control" placeholder="+79991234567" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="Email" class="form-label">Email</label>
+            <input asp-for="Email" class="form-control" type="email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <button type="submit" class="btn btn-success btn-lg">Добавить гостя</button>
+        <a asp-action="Index" class="btn btn-secondary btn-lg ms-3">Отмена</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

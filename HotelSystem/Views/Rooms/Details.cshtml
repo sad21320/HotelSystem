@@ -1,0 +1,21 @@
+﻿@model HotelSystem.Models.Room
+<h2>Номер @Model.RoomNumber</h2>
+
+<div class="card">
+    <div class="card-body">
+        <p><strong>Этаж:</strong> @Model.Floor</p>
+        <p><strong>Тип:</strong> @Model.RoomType.TypeName</p>
+        <p><strong>Вместимость:</strong> @Model.RoomType.Capacity человек</p>
+        <p><strong>Цена за ночь:</strong> @Model.RoomType.BasePrice.ToString("C0")</p>
+        <p>
+            <strong>Статус:</strong>
+            <span class="badge @(Model.Status == "Available" ? "bg-success" : Model.Status == "Booked" ? "bg-danger" : "bg-warning text-dark")">
+                @(Model.Status == "Available" ? "Свободен" : Model.Status == "Booked" ? "Забронирован" : "Уборка")
+            </span>
+        </p>
+    </div>
+    <div class="card-footer">
+        <a asp-action="Edit" asp-route-id="@Model.RoomID" class="btn btn-warning">Изменить</a>
+        <a asp-action="Index" class="btn btn-secondary">Назад</a>
+    </div>
+</div>

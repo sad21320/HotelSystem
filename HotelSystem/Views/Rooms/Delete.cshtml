@@ -1,0 +1,19 @@
+﻿@model HotelSystem.Models.Room
+<h2>Удалить номер @Model.RoomNumber?</h2>
+<h4 class="text-danger">Это действие нельзя отменить!</h4>
+
+<div class="card border-danger">
+    <div class="card-body">
+        <p><strong>Этаж:</strong> @Model.Floor</p>
+        <p><strong>Тип:</strong> @Model.RoomType.TypeName</p>
+        <p><strong>Статус:</strong> @Model.Status</p>
+    </div>
+    <div class="card-footer">
+        <form asp-action="Delete" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="RoomID" />
+            <button type="submit" class="btn btn-danger">Удалить</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Отмена</a>
+        </form>
+    </div>
+</div>
